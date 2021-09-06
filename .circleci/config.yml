@@ -174,7 +174,7 @@ commands:
       - checkout
       # In case of failure, add these steps again. Cache probably got deleted
       #- <<: *restore_cache
-      <<: *install_node_modules
+      - <<: *install_node_modules
       #- <<: *persist_cache
       - unless:
           condition: << parameters.skip_file_change_test >>
