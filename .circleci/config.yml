@@ -90,7 +90,7 @@ aliases:
     filters:
       branches:
         ignore:
-          - master
+          #- master
           - /docs.+/
           - /blog.+/
     requires:
@@ -588,53 +588,53 @@ workflows:
       - typecheck:
           requires:
             - bootstrap
-      - windows_unit_tests:
-          <<: *ignore_docs
-          requires:
-            - lint
+      # - windows_unit_tests:
+      #     <<: *ignore_docs
+      #     requires:
+      #       - lint
       - unit_tests_node12:
           <<: *ignore_docs
           requires:
             - lint
             - typecheck
             - bootstrap
-      - unit_tests_node14:
-          <<: *ignore_docs
-          requires:
-            - lint
-            - typecheck
-            - bootstrap
-      - unit_tests_node14_lmdb_store:
-          <<: *ignore_docs
-          # rebuild to get correct version of lmdb-store (compiled for node14 not node12)
-          npm_rebuild: true
-          requires:
-            - lint
-            - typecheck
-            - bootstrap
-      - integration_tests_gatsby_source_wordpress:
-          <<: *e2e-test-workflow
-      - integration_tests_node_manifest:
-          <<: *e2e-test-workflow
-      - integration_tests_long_term_caching:
-          <<: *e2e-test-workflow
-      - integration_tests_cache_resilience:
-          <<: *e2e-test-workflow
-      - integration_tests_gatsby_pipeline:
-          <<: *e2e-test-workflow
-      - integration_tests_structured_logging:
-          <<: *e2e-test-workflow
-      - integration_tests_artifacts:
-          <<: *e2e-test-workflow
-      - integration_tests_ssr:
-          <<: *e2e-test-workflow
-      - integration_tests_images:
-          <<: *e2e-test-workflow
-      - integration_tests_functions:
-          <<: *e2e-test-workflow
-      - integration_tests_gatsby_cli:
-          requires:
-            - bootstrap
+      # - unit_tests_node14:
+      #     <<: *ignore_docs
+      #     requires:
+      #       - lint
+      #       - typecheck
+      #       - bootstrap
+      # - unit_tests_node14_lmdb_store:
+      #     <<: *ignore_docs
+      #     # rebuild to get correct version of lmdb-store (compiled for node14 not node12)
+      #     npm_rebuild: true
+      #     requires:
+      #       - lint
+      #       - typecheck
+      #       - bootstrap
+      # - integration_tests_gatsby_source_wordpress:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_node_manifest:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_long_term_caching:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_cache_resilience:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_gatsby_pipeline:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_structured_logging:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_artifacts:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_ssr:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_images:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_functions:
+      #     <<: *e2e-test-workflow
+      # - integration_tests_gatsby_cli:
+      #     requires:
+      #       - bootstrap
       - e2e_tests_pnp:
           <<: *e2e-test-workflow
       - e2e_tests_path-prefix:
@@ -651,21 +651,21 @@ workflows:
           <<: *e2e-test-workflow
       - e2e_tests_production_runtime:
           <<: *e2e-test-workflow
-      - themes_e2e_tests_production_runtime:
-          <<: *e2e-test-workflow
-      - themes_e2e_tests_development_runtime:
-          <<: *e2e-test-workflow
-      - mdx_e2e_tests:
-          <<: *e2e-test-workflow
-      - starters_validate:
-          <<: *ignore_master
-      - starters_publish:
-          filters:
-            branches:
-              only:
-                - master
-      - update_i18n_source:
-          filters:
-            branches:
-              only:
-                - master
+      # - themes_e2e_tests_production_runtime:
+      #     <<: *e2e-test-workflow
+      # - themes_e2e_tests_development_runtime:
+      #     <<: *e2e-test-workflow
+      # - mdx_e2e_tests:
+      #     <<: *e2e-test-workflow
+      # - starters_validate:
+      #     <<: *ignore_master
+      # - starters_publish:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
+      # - update_i18n_source:
+      #     filters:
+      #       branches:
+      #         only:
+      #           - master
