@@ -118,7 +118,7 @@ aliases:
     parameters:
       nightly:
         type: boolean
-        default: false
+        default: true
     environment:
       CYPRESS_PROJECT_ID: s3j3qj
       CYPRESS_RECORD_KEY: 3904ca0c-bc98-47d9-8371-b68c5e81fb9b
