@@ -94,8 +94,8 @@ aliases:
           - /docs.+/
           - /blog.+/
     requires:
-      - lint
-      - typecheck
+      # - lint
+      # - typecheck
       - unit_tests_node12
 
   e2e_tests_production_runtime_alias: &e2e_tests_production_runtime_alias
@@ -103,7 +103,7 @@ aliases:
     parameters:
       nightly:
         type: boolean
-        default: false
+        default: true
     steps:
       - e2e-test:
           test_path: e2e-tests/production-runtime
@@ -112,6 +112,7 @@ aliases:
       - notify-status:
           condition: << parameters.nightly >>
 
+  # Cancel Skip Check
   e2e_tests_development_runtime_alias: &e2e_tests_development_runtime_alias
     <<: *e2e-executor
     parameters:
@@ -584,10 +585,10 @@ workflows:
   build-test:
     jobs:
       - bootstrap
-      - lint
-      - typecheck:
-          requires:
-            - bootstrap
+      # - lint
+      # - typecheck:
+      #     requires:
+      #       - bootstrap
       # - windows_unit_tests:
       #     <<: *ignore_docs
       #     requires:
@@ -595,8 +596,8 @@ workflows:
       - unit_tests_node12:
           <<: *ignore_docs
           requires:
-            - lint
-            - typecheck
+            # - lint
+            # - typecheck
             - bootstrap
       # - unit_tests_node14:
       #     <<: *ignore_docs
@@ -635,22 +636,22 @@ workflows:
       # - integration_tests_gatsby_cli:
       #     requires:
       #       - bootstrap
-      - e2e_tests_pnp:
-          <<: *e2e-test-workflow
-      - e2e_tests_path-prefix:
-          <<: *e2e-test-workflow
-      - e2e_tests_gatsby-image:
-          <<: *e2e-test-workflow
-      - e2e_tests_gatsby-static-image:
-          <<: *e2e-test-workflow
-      - e2e_tests_visual-regression:
-          <<: *e2e-test-workflow
-      - e2e_tests_contentful:
-          <<: *e2e-test-workflow
+      # - e2e_tests_pnp:
+      #     <<: *e2e-test-workflow
+      # - e2e_tests_path-prefix:
+      #     <<: *e2e-test-workflow
+      # - e2e_tests_gatsby-image:
+      #     <<: *e2e-test-workflow
+      # - e2e_tests_gatsby-static-image:
+      #     <<: *e2e-test-workflow
+      # - e2e_tests_visual-regression:
+      #     <<: *e2e-test-workflow
+      # - e2e_tests_contentful:
+      #     <<: *e2e-test-workflow
       - e2e_tests_development_runtime:
           <<: *e2e-test-workflow
-      - e2e_tests_production_runtime:
-          <<: *e2e-test-workflow
+      # - e2e_tests_production_runtime:
+      #     <<: *e2e-test-workflow
       # - themes_e2e_tests_production_runtime:
       #     <<: *e2e-test-workflow
       # - themes_e2e_tests_development_runtime:
