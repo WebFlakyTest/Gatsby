@@ -161,7 +161,7 @@ commands:
     parameters:
       skip_file_change_test:
         type: boolean
-        default: false
+        default: true
       trigger_pattern:
         type: string
         default: "packages/*|.circleci/*|scripts/e2e-test.sh"
