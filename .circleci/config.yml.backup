@@ -581,6 +581,64 @@ jobs:
 workflows:
   version: 2
 
+  weekly-i18n-sync:
+    triggers:
+      - schedule:
+          cron: "0 1 * * 6"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - sync_translation_repo
+
+  nightly-react-next:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 1,2,3,4,5"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - bootstrap-with-experimental-react:
+          version: "next"
+      - e2e_tests_gatsby-image_with_next_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_development_runtime_with_next_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_production_runtime_with_next_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+  nightly-react-experimental:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 1,2,3,4,5"
+          filters:
+            branches:
+              only:
+                - master
+    jobs:
+      - bootstrap-with-experimental-react:
+          version: "experimental"
+      - e2e_tests_gatsby-image_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_development_runtime_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_production_runtime_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+
   build-test:
     jobs:
       - bootstrap
