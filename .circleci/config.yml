@@ -670,3 +670,19 @@ workflows:
       #       branches:
       #         only:
       #           - master
+  nightly-react-experimental:
+    jobs:
+      - bootstrap-with-experimental-react:
+          version: "experimental"
+      - e2e_tests_gatsby-image_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_development_runtime_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
+      - e2e_tests_production_runtime_with_experimental_react:
+          nightly: true
+          requires:
+            - bootstrap-with-experimental-react
