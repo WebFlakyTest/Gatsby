@@ -152,7 +152,8 @@ commands:
         type: boolean
         default: false
     steps:
-      - when:
+      #- when:
+      - unless:
           condition: << parameters.condition >>
           steps:
             - slack/status:
@@ -648,8 +649,8 @@ workflows:
       #     <<: *e2e-test-workflow
       # - e2e_tests_contentful:
       #     <<: *e2e-test-workflow
-      - e2e_tests_development_runtime:
-          <<: *e2e-test-workflow
+      # - e2e_tests_development_runtime:
+      #     <<: *e2e-test-workflow
       # - e2e_tests_production_runtime:
       #     <<: *e2e-test-workflow
       # - themes_e2e_tests_production_runtime:
